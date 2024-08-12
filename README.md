@@ -1,4 +1,3 @@
-```markdown
 # NeuralBotTrade
 
 **NeuralBotTrade** es un bot de trading algorítmico para Bitcoin en Bybit. Utiliza una red neuronal convolucional que analiza datos técnicos, blockchain, sentimiento en redes, y otros indicadores para predecir movimientos de precio. Desarrollado en Python, desplegado en Google Cloud con Docker y Airflow, y registra operaciones en una base de datos PostgreSQL.
@@ -24,17 +23,20 @@ Sigue estos pasos para instalar y configurar **NeuralBotTrade** en tu entorno en
 
    ```bash
    git clone https://github.com/aseba10/NeuralTradeBot.git
+   
    cd NeuralTradeBot
-   ```
-
+   
 2. **Configurar el Archivo `config.py`**:
 
    Abre el archivo `dags/settings/config.py` y completa los siguientes valores:
 
    ```python
    ORDER_SIZE_DEFAULT = [Tu valor aquí] #este valor es el monto en usd de cada orden, por defecto 10
-   PROFIT_MARGIN = [Tu valor aquí] #se ejecutará una orden de venta siempre que supere este margen de take profit con respecto a una orden de compra ejecutada
+   
+   PROFIT_MARGIN = [Tu valor aquí] #se ejecutará una orden de venta siempre que supere este margen de take profit con respecto a una orden de compra ejecutada, por defecto 3%
+   
    BYBIT_API_KEY = "Tu API Key de Bybit"
+   
    BYBIT_API_SECRET = "Tu API Secret de Bybit"
    ```
 
@@ -72,7 +74,47 @@ Estos pasos te configurarán el entorno necesario para ejecutar **NeuralTradeBot
 
 ## Uso
 
-Para ejecutar **NeuralTradeBot**, sigue estos pasos una vez que hayas completado la instalación. (Incluye aquí instrucciones de uso, ejemplos de comandos y cualquier otro detalle relevante).
+Una vez que hayas completado la instalación, sigue estos pasos para utilizar **NeuralBotTrade**:
+
+1. **Acceder a Airflow**:
+
+   **NeuralBotTrade** utiliza Airflow para la orquestación de tareas. Para acceder a la interfaz de Airflow y verificar que los DAGs (Directed Acyclic Graphs) se están ejecutando correctamente, sigue estos pasos:
+
+   - **Accede a la interfaz de Airflow** en tu navegador web. Si estás utilizando Google Cloud, la URL suele ser algo como `http://[IP_O_DOMINIO_DEL_SERVIDOR]:8080`.
+   - **Inicia sesión** con las credenciales configuradas en tu archivo `docker-compose.yml`.
+   - **Verifica los DAGs** y sus estados en la interfaz para asegurarte de que se están ejecutando según lo esperado.
+
+2. **Acceder a PostgreSQL**:
+
+   **NeuralBotTrade** registra las operaciones en una base de datos PostgreSQL. Puedes acceder a PostgreSQL para ver las órdenes que se están ejecutando utilizando herramientas de administración de bases de datos o directamente desde la línea de comandos:
+
+   - **Accede a PostgreSQL** desde la línea de comandos dentro del contenedor de Docker:
+
+     ```bash
+     docker exec -it [nombre_del_contenedor_postgres] psql -U [usuario] -d [nombre_de_la_base_de_datos]
+     ```
+
+   - **Consulta las órdenes** ejecutadas. Por ejemplo, para ver las órdenes en la tabla `orders_created`, puedes usar:
+
+     ```sql
+     SELECT * FROM orders_created;
+     ```
+
+   - **Alternativamente**, puedes utilizar herramientas de administración de bases de datos como pgAdmin para conectarte a tu instancia de PostgreSQL y explorar los datos de manera gráfica.
+
+Estos pasos te permitirán monitorear y gestionar el funcionamiento de **NeuralBotTrade** a través de Airflow y PostgreSQL.
+
+3. **Backtesting**:
+
+   Para evaluar el rendimiento del bot y analizar las señales generadas, puedes utilizar el archivo `botCNN/bot_backtesting.ipynb`. Este cuaderno de Jupyter te permitirá visualizar gráficamente las señales generadas por el bot y ver cuáles de ellas cumplieron con las reglas de gestión de dinero y fueron ejecutadas.
+
+   - **Abrir el Cuaderno**: Navega a `botCNN/bot_backtesting.ipynb` en tu entorno de trabajo.
+   - **Ejecutar el Cuaderno**: Abre el cuaderno en Jupyter y ejecuta las celdas para cargar los datos y generar los gráficos.
+   - **Analizar los Resultados**: El gráfico resultante mostrará las señales del bot y destacará cuáles fueron ejecutadas conforme a las reglas establecidas. Esto te permitirá evaluar la efectividad de las estrategias del bot.
+
+Este proceso de backtesting es fundamental para verificar la estrategia del bot y ajustar los parámetros según sea necesario.
+
+![alt text](image.png)
 
 ## Características
 
@@ -80,6 +122,8 @@ Para ejecutar **NeuralTradeBot**, sigue estos pasos una vez que hayas completado
 - Integración de múltiples fuentes de datos (técnicos, on-chain, sentimiento social).
 - Despliegue en la nube con Docker y Airflow.
 - Registro de operaciones en PostgreSQL.
+- Explicar como se genera el modelo, indicadores técnicos y no técnicos, escalado, oversampler, generación de targets
+- incluir graficos de validación
 
 ## Configuración
 
@@ -117,6 +161,3 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 Para preguntas o sugerencias, puedes contactarme en [sebastianalvarezdata@gmail.com](mailto:sebastianalvarezdata@gmail.com).
 
-```
-
-Este texto está listo para pegarse directamente en tu README.md. ¿Hay algo más que te gustaría agregar o ajustar?
