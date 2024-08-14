@@ -72,6 +72,20 @@ Sigue estos pasos para instalar y configurar **NeuralBotTrade** en tu entorno en
 
 Estos pasos te configurarán el entorno necesario para ejecutar **NeuralTradeBot** en tu máquina virtual.
 
+## Características
+
+El bot accede a la API de Bybit para descargar los datos más recientes, y luego genera más de 40 indicadores de análisis técnico, cubriendo tendencias, momentum, volatilidad, volumen, entre otros. Posteriormente, se ejecuta una función adicional que genera otro tipo de indicadores y datos, incluyendo información de otros activos, análisis de sentimiento en redes sociales, movimientos en la blockchain, indicadores macroeconómicos, entre otros.
+
+![colums](image-4.png)
+
+Estos datos son procesados por un modelo de redes neuronales convolucionales, el cual produce señales de compra, venta o mantenimiento. El proceso incluye una función de etiquetado basada en criterios específicos de evolución del precio en rondas futuras. Tras aplicar técnicas de escalado y sobremuestreo, se entrena el modelo que genera las señales correspondientes.
+
+![validationCnn](image-2.png)
+
+![confusionMatrix](image-3.png)
+
+Además, se establecen reglas de gestión de capital, como el número máximo de operaciones diarias y las condiciones de take profit. Si se cumplen estas reglas, se ejecuta la orden y se registra en la base de datos PostgreSQL.
+
 ## Uso
 
 Una vez que hayas completado la instalación, sigue estos pasos para utilizar **NeuralBotTrade**:
@@ -86,21 +100,7 @@ Una vez que hayas completado la instalación, sigue estos pasos para utilizar **
 
 2. **Acceder a PostgreSQL**:
 
-   **NeuralBotTrade** registra las operaciones en una base de datos PostgreSQL. Puedes acceder a PostgreSQL para ver las órdenes que se están ejecutando utilizando herramientas de administración de bases de datos o directamente desde la línea de comandos:
-
-   - **Accede a PostgreSQL** desde la línea de comandos dentro del contenedor de Docker:
-
-     ```bash
-     docker exec -it [nombre_del_contenedor_postgres] psql -U [usuario] -d [nombre_de_la_base_de_datos]
-     ```
-
-   - **Consulta las órdenes** ejecutadas. Por ejemplo, para ver las órdenes en la tabla `orders_created`, puedes usar:
-
-     ```sql
-     SELECT * FROM orders_created;
-     ```
-
-   - **Alternativamente**, puedes utilizar herramientas de administración de bases de datos como pgAdmin para conectarte a tu instancia de PostgreSQL y explorar los datos de manera gráfica.
+   **NeuralBotTrade** registra las operaciones en una base de datos PostgreSQL. Puedes acceder a PostgreSQL para ver las órdenes que se están ejecutando utilizando herramientas de administración de bases de datos o directamente desde la línea de comandos.
 
 Estos pasos te permitirán monitorear y gestionar el funcionamiento de **NeuralBotTrade** a través de Airflow y PostgreSQL.
 
@@ -114,16 +114,8 @@ Estos pasos te permitirán monitorear y gestionar el funcionamiento de **NeuralB
 
 Este proceso de backtesting es fundamental para verificar la estrategia del bot y ajustar los parámetros según sea necesario.
 
-![alt text](image.png)
+![backtesting](image.png)
 
-## Características
-
-- Trading algorítmico avanzado con CNN.
-- Integración de múltiples fuentes de datos (técnicos, on-chain, sentimiento social).
-- Despliegue en la nube con Docker y Airflow.
-- Registro de operaciones en PostgreSQL.
-- Explicar como se genera el modelo, indicadores técnicos y no técnicos, escalado, oversampler, generación de targets
-- incluir graficos de validación
 
 ## Configuración
 
