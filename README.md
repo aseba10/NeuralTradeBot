@@ -15,7 +15,7 @@
 
 ## Instalación
 
-Sigue estos pasos para instalar y configurar **NeuralBotTrade** en tu entorno en la nube:
+Sigue estos pasos para instalar y configurar **NeuralTradeBot** en tu entorno en la nube:
 
 1. **Clonar el Repositorio**:
 
@@ -25,20 +25,64 @@ Sigue estos pasos para instalar y configurar **NeuralBotTrade** en tu entorno en
    git clone https://github.com/aseba10/NeuralTradeBot.git
    
    cd NeuralTradeBot
-   
-2. **Configurar el Archivo `config.py`**:
+   ```
 
-   Abre el archivo `dags/settings/config.py` y completa los siguientes valores:
+2. **Configurar el Archivo `.env`**:
+
+   Crea un archivo llamado `.env` en el directorio raíz del proyecto (si aún no existe) y añade las siguientes variables de entorno:
+
+   ```env
+   # Credenciales de Bybit
+   BYBIT_API_KEY=tu_clave_api
+   BYBIT_API_SECRET=tu_secreto_api
+
+   # Configuración de la base de datos PostgreSQL
+   DB_HOST=host_de_tu_base_de_datos
+   DB_DATABASE=airflow
+   DB_PORT=5432
+   DB_USERNAME=airflow
+   DB_PASSWORD=airflow
+   ```
+
+   - **`BYBIT_API_KEY`**: Tu clave de API para acceder a la API de Bybit.
+   - **`BYBIT_API_SECRET`**: Tu secreto de API para acceder a la API de Bybit.
+   - **`DB_HOST`**: La dirección del host de tu base de datos PostgreSQL. Puede ser una dirección IP o un nombre de host.
+   - **`DB_DATABASE`**: El nombre de la base de datos PostgreSQL. Por defecto, se utiliza `airflow`.
+   - **`DB_PORT`**: El puerto en el que está escuchando tu base de datos PostgreSQL. El puerto por defecto es `5432`.
+   - **`DB_USERNAME`**: El nombre de usuario para acceder a la base de datos PostgreSQL. Por defecto, se utiliza `airflow`.
+   - **`DB_PASSWORD`**: La contraseña para acceder a la base de datos PostgreSQL. Por defecto, se utiliza `airflow`.
+
+3. **Configurar el Archivo `config.py`**:
+
+   Asegúrate de que el archivo `dags/settings/config.py` esté configurado para cargar las variables de entorno definidas en el archivo `.env`. Este archivo debería verse así:
 
    ```python
-   ORDER_SIZE_DEFAULT = [Tu valor aquí] #este valor es el monto en usd de cada orden, por defecto 10
-   
-   PROFIT_MARGIN = [Tu valor aquí] #se ejecutará una orden de venta siempre que supere este margen de take profit con respecto a una orden de compra ejecutada, por defecto 3%
-   
-   BYBIT_API_KEY = "Tu API Key de Bybit"
-   
-   BYBIT_API_SECRET = "Tu API Secret de Bybit"
+   from dotenv import load_dotenv
+   import os
+
+   # Cargar las variables de entorno desde el archivo .env
+   load_dotenv()
+
+   # Obtener las credenciales de la API de Bybit
+   BYBIT_API_KEY = os.getenv('BYBIT_API_KEY')
+   BYBIT_API_SECRET = os.getenv('BYBIT_API_SECRET')
+
+   # Obtener la configuración de la base de datos
+   host = os.getenv('DB_HOST')
+   database = os.getenv('DB_DATABASE')
+   port = os.getenv('DB_PORT')
+   user = os.getenv('DB_USERNAME')
+   password = os.getenv('DB_PASSWORD')
+
+   # Valores por defecto para el tamaño de la orden y el margen de beneficio
+   ORDER_SIZE_DEFAULT = 10
+   PROFIT_MARGIN = 1.03
    ```
+
+   - **`ORDER_SIZE_DEFAULT`**: Monto en USD de cada orden. Por defecto, se establece en `10`.
+   - **`PROFIT_MARGIN`**: Margen de beneficio para ejecutar una orden de venta en relación con una orden de compra ejecutada. Por defecto, se establece en `1.03` (equivalente al 3%).
+
+Asegúrate de reemplazar los valores predeterminados en el archivo `.env` con los valores reales de tu entorno.
 
 3. **Instalar Docker y Docker Compose** (si no están instalados):
 
@@ -76,13 +120,13 @@ Estos pasos te configurarán el entorno necesario para ejecutar **NeuralTradeBot
 
 El bot accede a la API de Bybit para descargar los datos más recientes, y luego genera más de 40 indicadores de análisis técnico, cubriendo tendencias, momentum, volatilidad, volumen, entre otros. Posteriormente, se ejecuta una función adicional que genera otro tipo de indicadores y datos, incluyendo información de otros activos, análisis de sentimiento en redes sociales, movimientos en la blockchain, indicadores macroeconómicos, entre otros.
 
-![colums](image-4.png)
+![colums](images/image-4.png)
 
 Estos datos son procesados por un modelo de redes neuronales convolucionales, el cual produce señales de compra, venta o mantenimiento. El proceso incluye una función de etiquetado basada en criterios específicos de evolución del precio en rondas futuras. Tras aplicar técnicas de escalado y sobremuestreo, se entrena el modelo que genera las señales correspondientes.
 
-![validationCnn](image-2.png)
+![validationCnn](images/image-2.png)
 
-![confusionMatrix](image-3.png)
+![confusionMatrix](images/image-3.png)
 
 Además, se establecen reglas de gestión de capital, como el número máximo de operaciones diarias y las condiciones de take profit. Si se cumplen estas reglas, se ejecuta la orden y se registra en la base de datos PostgreSQL.
 
@@ -114,7 +158,7 @@ Estos pasos te permitirán monitorear y gestionar el funcionamiento de **NeuralB
 
 Este proceso de backtesting es fundamental para verificar la estrategia del bot y ajustar los parámetros según sea necesario.
 
-![backtesting](image.png)
+![backtesting](images/image.png)
 
 
 ## Configuración
