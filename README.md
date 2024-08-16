@@ -1,8 +1,8 @@
 ![alt text](images/logo.png)
 
-# NeuralBotTrade
+# NeuralBot
 
-**NeuralBotTrade** es un bot de trading algorítmico para Bitcoin en Bybit. Utiliza una red neuronal convolucional que analiza datos técnicos, blockchain, sentimiento en redes, y otros indicadores para predecir movimientos de precio. Desarrollado en Python, desplegado en Google Cloud con Docker y Airflow, y registra operaciones en una base de datos PostgreSQL.
+**NeuralBot** es un bot de trading algorítmico para Bitcoin en Bybit. Utiliza una red neuronal convolucional que analiza datos técnicos, blockchain, sentimiento en redes, y otros indicadores para predecir movimientos de precio. Desarrollado en Python, desplegado en Google Cloud con Docker y Airflow, y registra operaciones en una base de datos PostgreSQL.
 
 ## Tabla de Contenidos
 
@@ -17,7 +17,7 @@
 
 ## Instalación
 
-Sigue estos pasos para instalar y configurar **NeuralTradeBot** en tu entorno en la nube:
+Sigue estos pasos para instalar y configurar **NeuralBot** en tu entorno en la nube:
 
 1. **Clonar el Repositorio**:
 
@@ -26,7 +26,7 @@ Sigue estos pasos para instalar y configurar **NeuralTradeBot** en tu entorno en
    ```bash
    git clone https://github.com/aseba10/NeuralTradeBot.git
    
-   cd NeuralTradeBot
+   cd NeuralBot
    ```
 
 2. **Configurar el Archivo `.env`**:
@@ -106,7 +106,7 @@ Asegúrate de reemplazar los valores predeterminados en el archivo `.env` con lo
 
 4. **Construir y Levantar los Contenedores**:
 
-   Desde el directorio `NeuralTradeBot`, ejecuta los siguientes comandos para construir y levantar los contenedores:
+   Desde el directorio `NeuralBot`, ejecuta los siguientes comandos para construir y levantar los contenedores:
 
    ```bash
    # Construir los contenedores (solo si es necesario)
@@ -116,7 +116,7 @@ Asegúrate de reemplazar los valores predeterminados en el archivo `.env` con lo
    docker-compose up -d
    ```
 
-Estos pasos te configurarán el entorno necesario para ejecutar **NeuralTradeBot** en tu máquina virtual.
+Estos pasos te configurarán el entorno necesario para ejecutar **NeuralBot** en tu máquina virtual.
 
 ## Características
 
@@ -134,11 +134,11 @@ Además, se establecen reglas de gestión de capital, como el número máximo de
 
 ## Uso
 
-Una vez que hayas completado la instalación, sigue estos pasos para utilizar **NeuralBotTrade**:
+Una vez que hayas completado la instalación, sigue estos pasos para utilizar **NeuralBot**:
 
 1. **Acceder a Airflow**:
 
-   **NeuralBotTrade** utiliza Airflow para la orquestación de tareas. Para acceder a la interfaz de Airflow y verificar que los DAGs (Directed Acyclic Graphs) se están ejecutando correctamente, sigue estos pasos:
+   **NeuralBot** utiliza Airflow para la orquestación de tareas. Para acceder a la interfaz de Airflow y verificar que los DAGs (Directed Acyclic Graphs) se están ejecutando correctamente, sigue estos pasos:
 
    - **Accede a la interfaz de Airflow** en tu navegador web. Si estás utilizando Google Cloud, la URL suele ser algo como `http://[IP_O_DOMINIO_DEL_SERVIDOR]:8080`.
    - **Inicia sesión** con las credenciales configuradas en tu archivo `docker-compose.yml`.
@@ -146,9 +146,9 @@ Una vez que hayas completado la instalación, sigue estos pasos para utilizar **
 
 2. **Acceder a PostgreSQL**:
 
-   **NeuralBotTrade** registra las operaciones en una base de datos PostgreSQL. Puedes acceder a PostgreSQL para ver las órdenes que se están ejecutando utilizando herramientas de administración de bases de datos o directamente desde la línea de comandos.
+   **NeuralBot** registra las operaciones en una base de datos PostgreSQL. Puedes acceder a PostgreSQL para ver las órdenes que se están ejecutando utilizando herramientas de administración de bases de datos o directamente desde la línea de comandos.
 
-Estos pasos te permitirán monitorear y gestionar el funcionamiento de **NeuralBotTrade** a través de Airflow y PostgreSQL.
+Estos pasos te permitirán monitorear y gestionar el funcionamiento de **NeuralBot** a través de Airflow y PostgreSQL.
 
 3. **Backtesting**:
 
@@ -169,7 +169,7 @@ El bot se configura a través del archivo `config.py` en el directorio `dags/set
 
 ## Documentación
 
-Para más detalles sobre la configuración avanzada y el uso de **NeuralTradeBot**, consulta la [documentación](link_to_docs).
+Para más detalles sobre la configuración avanzada y el uso de **NeuralBot**, consulta la [documentación](link_to_docs).
 
 ## Contribuir
 
@@ -177,7 +177,7 @@ Para más detalles sobre la configuración avanzada y el uso de **NeuralTradeBot
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/aseba10/NeuralTradeBot.git
+git clone https://github.com/aseba10/NeuralBot.git
 
 # Crear una rama nueva
 git checkout -b nombre-de-tu-rama
