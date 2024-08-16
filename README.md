@@ -1,4 +1,4 @@
-![alt text](images/image.png)
+![alt text](images/logo.png)
 
 # NeuralBotTrade
 
