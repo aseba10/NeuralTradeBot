@@ -144,11 +144,15 @@ Una vez que hayas completado la instalación, sigue estos pasos para utilizar **
    - **Inicia sesión** con las credenciales configuradas en tu archivo `docker-compose.yml`.
    - **Verifica los DAGs** y sus estados en la interfaz para asegurarte de que se están ejecutando según lo esperado.
 
+![airflow](images/image-5.png)
+
 2. **Acceder a PostgreSQL**:
 
    **NeuralBot** registra las operaciones en una base de datos PostgreSQL. Puedes acceder a PostgreSQL para ver las órdenes que se están ejecutando utilizando herramientas de administración de bases de datos o directamente desde la línea de comandos.
 
 Estos pasos te permitirán monitorear y gestionar el funcionamiento de **NeuralBot** a través de Airflow y PostgreSQL.
+
+![airflow](images/postnet.png)
 
 3. **Backtesting**:
 
