@@ -132,6 +132,8 @@ Estos datos son procesados por un modelo de redes neuronales convolucionales, el
 
 Además, se establecen reglas de gestión de capital, como el número máximo de operaciones diarias y las condiciones de take profit. Si se cumplen estas reglas, se ejecuta la orden y se registra en la base de datos PostgreSQL.
 
+![bybit](images/bybit.png)
+
 ## Uso
 
 Una vez que hayas completado la instalación, sigue estos pasos para utilizar **NeuralBot**:
